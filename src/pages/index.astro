@@ -5,7 +5,7 @@ const pageTitle = "Home Page";
 
 
 const res = await fetch('https://cms.leapmotornepal.com/wp-json/wp/v2/posts', {
-  method: 'GET' // or POST, PUT, etc., depending on the route
+  method: 'GET' 
 });
 const posts = await res.json();
 ---
@@ -14,9 +14,12 @@ const posts = await res.json();
   <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
 
   {
-    posts.map((post) => (
-        <h2 set:html={post.title.rendered} />
-        <p set:html={post.content.rendered} />
-    ))
+     posts.map((post) => (
+        <article>
+          <h2>
+            <a href={`/posts/${post.slug}/`} set:html={post.title.rendered} />
+          </h2>
+        </article>
+      ))
   }
 </BaseLayout>
