@@ -2,8 +2,21 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Greeting from '../components/Greeting.jsx';
 const pageTitle = "Home Page";
+
+
+const res = await fetch('https://cms.leapmotornepal.com/wp-json/wp/v2/posts', {
+  method: 'GET' // or POST, PUT, etc., depending on the route
+});
+const posts = await res.json();
 ---
 <BaseLayout pageTitle = {pageTitle}>
   <h2>My awesome blog subtitle</h2>
   <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
+
+  {
+    posts.map((post) => (
+        <h2 set:html={post.title.rendered} />
+        <p set:html={post.content.rendered} />
+    ))
+  }
 </BaseLayout>
