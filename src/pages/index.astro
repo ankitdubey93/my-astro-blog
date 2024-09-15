@@ -4,7 +4,7 @@ import Greeting from '../components/Greeting.jsx';
 const pageTitle = "Home Page";
 
 
-const res = await fetch('https://cms.leapmotornepal.com/wp-json/wp/v2/posts', {
+const res = await fetch('https://cms.leapmotornepal.com/wp-json/wp/v2/posts',{
   method: 'GET' 
 });
 const posts = await res.json();
